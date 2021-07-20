@@ -1,6 +1,5 @@
 from datetime import datetime, timedelta 
 import asyncio
-from pandas import date_range
 from calendar import Calendar
 
 class DateGen:
@@ -12,10 +11,9 @@ class DateGen:
     @staticmethod
     async def days(Range: int):
         return [(datetime.now() -  timedelta(days=i)).strftime("%Y-%m-%d")  for i in range(Range)]
-    @staticmethod
-    async def last_week(last: int):
-        last_week = datetime.now() - timedelta(weeks=last)
-        return date_range(start=last_week.strftime('%Y/%m/%d'), end=datetime.now().strftime('%Y/%m/%d'))
+
+    async def last_week(self, last: int):
+        return self.days(last * 7)
     @staticmethod
     async def this_month():
         year = datetime.today().year
